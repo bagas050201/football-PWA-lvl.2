@@ -1,10 +1,10 @@
-const CACHE_NAME = "bola spanyol-v1.2";
+const CACHE_NAME = "bola spanyol-v1.3";
 var urlsToCache = [
   "/",
   "/nav.html",
   "/index.html",
   "/manifest.json",
-  "push.js",
+  "/push.js",
   "/pages/klasemen.html",
   "/pages/favorite.html",
   "/pages/information.html",
@@ -19,7 +19,9 @@ var urlsToCache = [
   "/js/register_sw.js",
   "/icon/icon-48.png",
   "/icon/icon-96.png",
-  "/icon/icon-192.png"
+  "/icon/icon-192.png",
+  "/icon/icon-512.png",
+  "/icon/maskable_icon.png"
 ];
  
 self.addEventListener("install", event => {
