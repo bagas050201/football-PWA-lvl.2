@@ -1,4 +1,4 @@
-const API_KEY = "71b9f06957ce4e09a0b777dc04816b7f";
+const API_KEY = "71b9f06957ce4e09a0b777dc04816b7f"; //api key
 const BASE_URL = "https://api.football-data.org/v2/";
 const LEAGUE_ID = 2014;
 const ENDPOINT_COMPETITION = `${BASE_URL}competitions/${LEAGUE_ID}/standings`;
@@ -90,4 +90,46 @@ function showStanding(data) {
                 
                 </div>
     `;
+}
+
+
+function getAllTeams(){
+    if ("caches" in window) {
+        caches.match(INFORMATION_TEAM).then(function (response) { // const INFORMATION_TEAM = `${BASE_URL}competitions/${LEAGUE_ID}/teams`;
+            if (response) {
+                response.json().then(function (data) {
+                    console.log("Team Data: " + data);
+                    showTeams(data);
+                })
+            }
+        })
+    }
+    fetchAPI(INFORMATION_TEAM)
+        .then(data => {
+            showTeams(data);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+function showTeams(data){
+    let teams = "";
+    data.teams.forEach(function (team) {
+
+         teams += `
+                  <div class="card">
+                    <div class = "card-image">
+                        <span class="card-title">${team.name}</span>
+                    </div>
+                    <div class="card-content">
+                      <span class="card-title truncate">${team.name}</span>
+                      <p>${team.shortName}</p>
+                      <p>${team.address}</p>
+                      <p>${team.website}</p>
+                    </div>
+                  </div>`;
+                });
+    document.getElementById("infoteam").innerHTML = teams;
+    
 }
