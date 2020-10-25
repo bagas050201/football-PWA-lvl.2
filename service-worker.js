@@ -1,31 +1,25 @@
-const CACHE_NAME = "JajanYuk!-v3.2";
+const CACHE_NAME = "bola spanyol-v1.2";
 var urlsToCache = [
   "/",
   "/nav.html",
   "/index.html",
   "/manifest.json",
-  "/icon192px.png",
-  "/icon.png",
-  "/maskable_icon.png",
-  "/pages/home.html",
-  "/pages/about.html",
-  "/pages/makanan.html",
-  "/pages/minuman.html",
-  "/pages/snack.html",
-  "/image/logo.png",
-  "/image/sushi.jpg",
-  "/image/donatMie.jpg",
-  "/image/snack.jpg",
-  "/image/coffee.jpg",
-  "/image/boba.jpg",
-  "/image/salad.jpg",
+  "push.js",
+  "/pages/klasemen.html",
+  "/pages/favorite.html",
+  "/pages/information.html",
   "/css/materialize.min.css",
-  "/css/home.css",
+  "/css/materialize.css",
   "/js/materialize.min.js",
+  "/js/materialize.js",
+  "/js/api.js",
+  "/js/idb.js",
+  "/js/db.js",
   "/js/nav.js",
-  "/js/register_service_worker.js",
-  "https://fonts.googleapis.com/icon?family=Material+Icons",
-  "https://fonts.gstatic.com/s/materialicons/v55/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2"
+  "/js/register_sw.js",
+  "/icon/icon-48.png",
+  "/icon/icon-96.png",
+  "/icon/icon-192.png"
 ];
  
 self.addEventListener("install", event => {
@@ -69,3 +63,23 @@ self.addEventListener("fetch", event => {
       })
     );
   });
+
+  self.addEventListener("fetch", function(event) {
+    const base_url = "https://api.football-data.org/v2/";
+    if (event.request.url.indexOf(base_url) > -1) {
+        event.respondWith(
+            caches.open(CACHE_NAME).then(function(cache) {
+                return fetch(event.request).then(function(response) {
+                    cache.put(event.request.url, response.clone());
+                    return response;
+                })
+            })
+        );
+    } else {
+        event.respondWith(
+            caches.match(event.request, {'ignoreSearch': true}).then(function(response) {
+                return response || fetch (event.request);
+            })
+        )
+    }
+});
