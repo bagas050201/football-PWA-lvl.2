@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Load pages content
     var page = window.location.hash.substr(1);
-    if (page === "") page = "standing";
+    if (page === "") page = "klasemen";
     loadPage(page);
 
     function loadPage(page) {
@@ -45,7 +45,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 var content = document.querySelector("#body-content");
                 if (this.status === 200) {
                     content.innerHTML = xhttp.responseText;
-                    getAllStandings()
+                    if (page === 'klasemen'){
+                        getAllStandings();
+                    }
+                    else if (page === 'information'){
+                        getAllTeams();
+                    }
                 } else if (this.status === 404) {
                     content.innerHTML = "<p>Halaman tidak ditemukan.</p>";
                 } else {
