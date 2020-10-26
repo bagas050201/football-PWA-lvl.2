@@ -1,4 +1,4 @@
-const CACHE_NAME = "bola spanyol-v1.6";
+const CACHE_NAME = "bola spanyol-v1.9";
 var urlsToCache = [
   "/",
   "/nav.html",
@@ -17,10 +17,11 @@ var urlsToCache = [
   "/js/db.js",
   "/js/nav.js",
   "/js/register_sw.js",
-  "/icon/icon-48.png",
-  "/icon/icon-96.png",
-  "/icon/icon-192.png",
-  "/icon/icon-512.png",
+  "/icon/icon-48new.png",
+  "/icon/icon-96new.png",
+  "/icon/icon-192new.png",
+  "/icon/icon-512new.png",
+  "/icon/icon-oritrans.png",
   "/icon/maskable_icon.png"
 ];
  
