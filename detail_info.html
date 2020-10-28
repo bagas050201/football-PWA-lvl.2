@@ -37,6 +37,8 @@
 
 <script src="js/materialize.min.js"></script>
 <script src="js/api.js"></script>
+<script src="js/idb.js"></script>
+<script src="js/db.js"></script>
 
 <script>
     // REGISTER SERVICE WORKER
@@ -54,9 +56,19 @@
     } else {
         console.log("ServiceWorker belum didukung browser ini.");
     }
-    document.addEventListener("DOMContentLoaded", function() {
-        getInfoTeams();
-    });
+
+document.addEventListener("DOMContentLoaded", function() {
+    let item = getInfoTeams();
+    let save = document.getElementById("save");
+    save.onclick = function() {
+        console.log("Tombol FAB di klik.");
+        item.then(function (information) {
+            console.log(information);
+            saveForLater(information);
+        });
+    };
+});
+
 </script>
 
 </body>
