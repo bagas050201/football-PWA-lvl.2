@@ -4,6 +4,7 @@ const LEAGUE_ID = 2014;
 const ENDPOINT_COMPETITION = `${BASE_URL}competitions/${LEAGUE_ID}/standings`;
 const INFORMATION_TEAM = `${BASE_URL}competitions/${LEAGUE_ID}/teams`;
 
+
 const fetchAPI = url => {
     return fetch(url, {
         headers: {
@@ -47,6 +48,7 @@ function getAllStandings() {
 }
 
 function showStanding(data) {
+    console.log(data)
     let standings = "";
     let standingElement =  document.getElementById("homeStandings");
 
@@ -92,7 +94,6 @@ function showStanding(data) {
     `;
 }
 
-
 function getAllTeams(){
     if ("caches" in window) {
         caches.match(INFORMATION_TEAM).then(function (response) { // const INFORMATION_TEAM = `${BASE_URL}competitions/${LEAGUE_ID}/teams`;
@@ -120,16 +121,57 @@ function showTeams(data){
          teams += `
                   <div class="card">
                     <div class = "card-image">
-                        <span class="card-title">${team.name}</span>
+                        <span class="card-title"></span>
                     </div>
+
+                    <a href="detail_info.html?id=${team.id}">
                     <div class="card-content">
                       <span class="card-title truncate">${team.name}</span>
-                      <p>${team.shortName}</p>
-                      <p>${team.address}</p>
-                      <p>${team.website}</p>
                     </div>
+                    </a>
                   </div>`;
                 });
     document.getElementById("infoteam").innerHTML = teams;
     
+}
+
+function getInfoTeams(){
+    let urlParams = new URLSearchParams(window.location.search);
+    let idParam = urlParams.get("id");
+
+    if ("caches" in window) {
+        caches.match(`${BASE_URL}teams/`+ idParam).then(function (response) { // const INFORMATION_TEAM = `${BASE_URL}competitions/${LEAGUE_ID}/teams`;
+            if (response) {
+                response.json().then(function (data) {
+                    console.log("Team Data: " + data);
+                    getTeams(data);
+                })
+            }
+        })
+    }
+    fetchAPI(`${BASE_URL}teams/` + idParam)
+        .then(data => {
+            getTeams(data);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+function getTeams(data){
+    console.log(data)
+    let teams = "";
+        teams += `
+        <div class="card">
+          <div class = "card-image">
+            <img src = "${data.crestUrl}/>
+              <span class="card-title"></span>
+          </div>
+          <div class="card-content">
+            <span class="card-title truncate">${data.name}</span>
+            <p>${data.phone}</p>
+          </div>
+        </div>`;
+
+    document.getElementById("detail_info").innerHTML = teams;
 }
