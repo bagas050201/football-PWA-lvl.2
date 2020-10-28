@@ -4,7 +4,6 @@ const LEAGUE_ID = 2014;
 const ENDPOINT_COMPETITION = `${BASE_URL}competitions/${LEAGUE_ID}/standings`;
 const INFORMATION_TEAM = `${BASE_URL}competitions/${LEAGUE_ID}/teams`;
 
-
 const fetchAPI = url => {
     return fetch(url, {
         headers: {
@@ -91,7 +90,7 @@ function showStanding(data) {
                 </table>
                 
                 </div>
-    `;
+            `;
 }
 
 function getAllTeams(){
@@ -120,7 +119,7 @@ function showTeams(data){
     data.teams.forEach(function (team) {
 
          teams += `
-                    <a href="detail_info.html?id=${team.id}">
+                <a href="detail_info.html?id=${team.id}">
                   <div class="card">
                     <div class = "card-image">
                         <img src = "${team.crestUrl}" alt = "logo team"  style="width: 50%;display: block;margin-left: auto;margin-right: auto;top:20px;">
@@ -132,22 +131,24 @@ function showTeams(data){
                       <p>Since ${team.founded}</p>
                     </div>
                   </div>
-                  </a>`;
-                });
+                </a>`;
+            });
     document.getElementById("infoteam").innerHTML = teams;
     
 }
 
 function getInfoTeams(){
+    return new Promise(function(resolve, reject) {
     let urlParams = new URLSearchParams(window.location.search);
     let idParam = urlParams.get("id");
 
     if ("caches" in window) {
-        caches.match(`${BASE_URL}teams/`+ idParam).then(function (response) { // const INFORMATION_TEAM = `${BASE_URL}competitions/${LEAGUE_ID}/teams`;
+        caches.match(`${BASE_URL}teams/`+ idParam).then(function (response) {
             if (response) {
                 response.json().then(function (data) {
                     console.log("Team Data: " + data);
                     getTeams(data);
+                    resolve(data);
                 })
             }
         })
@@ -155,10 +156,12 @@ function getInfoTeams(){
     fetchAPI(`${BASE_URL}teams/` + idParam)
         .then(data => {
             getTeams(data);
+            resolve(data);
         })
         .catch(error => {
             console.log(error)
         })
+    });
 }
 
 function getTeams(data){
