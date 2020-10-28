@@ -138,7 +138,7 @@ function showTeams(data){
 }
 
 function getInfoTeams(){
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve, reject) {//add promise
     let urlParams = new URLSearchParams(window.location.search);
     let idParam = urlParams.get("id");
 
