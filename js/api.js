@@ -115,21 +115,24 @@ function getAllTeams(){
 }
 
 function showTeams(data){
+    console.log(data)
     let teams = "";
     data.teams.forEach(function (team) {
 
          teams += `
+                    <a href="detail_info.html?id=${team.id}">
                   <div class="card">
                     <div class = "card-image">
+                        <img src = "${team.crestUrl}" alt = "logo team"  style="width: 50%;display: block;margin-left: auto;margin-right: auto;top:20px;">
                         <span class="card-title"></span>
                     </div>
 
-                    <a href="detail_info.html?id=${team.id}">
-                    <div class="card-content">
+                    <div class="card-content" style="text-align: center;top:20px;" >
                       <span class="card-title truncate">${team.name}</span>
+                      <p>Since ${team.founded}</p>
                     </div>
-                    </a>
-                  </div>`;
+                  </div>
+                  </a>`;
                 });
     document.getElementById("infoteam").innerHTML = teams;
     
@@ -162,14 +165,19 @@ function getTeams(data){
     console.log(data)
     let teams = "";
         teams += `
-        <div class="card">
-          <div class = "card-image">
-            <img src = "${data.crestUrl}/>
+        <div class="card" style = "top:20px;">
+          <div class = "card-image" style="width: 30%;display: block;margin-left: auto;margin-right: auto;top :20px;">
+            <img src = "${data.crestUrl}"/>
               <span class="card-title"></span>
           </div>
           <div class="card-content">
-            <span class="card-title truncate">${data.name}</span>
-            <p>${data.phone}</p>
+            <span class="card-title truncate" style = "font-size:35px;font-weight:bold;text-align: center;margin-top:20px;padding-bottom:15px;">${data.name}</span>
+            <p>Short Name : ${data.shortName}</p>
+            <p>Since : ${data.founded}</p>
+            <p>Address : ${data.address}</p>
+            <p>Email : ${data.email}</p>
+            <p>Number Phone : ${data.phone}</p>
+            <p>Website : ${data.website}</p>
           </div>
         </div>`;
 
