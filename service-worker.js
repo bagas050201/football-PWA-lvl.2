@@ -1,4 +1,4 @@
-const CACHE_NAME = "bola spanyol-v2.7";
+const CACHE_NAME = "bola spanyol-v2.9";
 var urlsToCache = [
   "/",
   "/nav.html",
@@ -86,4 +86,26 @@ self.addEventListener("fetch", event => {
             })
         )
     }
+});
+
+//new line push event API
+self.addEventListener('push', function(event) {
+  var body;
+  if (event.data) {
+    body = event.data.text();
+  } else {
+    body = 'Push message no payload';
+  }
+  var options = {
+    body: body,
+    icon: 'icon/icon-192new.png',
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1
+    }
+  };
+  event.waitUntil(
+    self.registration.showNotification('Push Notification', options)
+  );
 });
