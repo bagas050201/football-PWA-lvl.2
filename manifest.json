@@ -1,5 +1,6 @@
 {
     "name": "Bola Spanyol",
+    "gcm_sender_id": "292971028946",
     "short_name": "B.Spain",
     "description": "Spain Football Apps",
     "start_url": "/index.html",
