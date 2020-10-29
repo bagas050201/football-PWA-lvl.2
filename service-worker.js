@@ -1,4 +1,4 @@
-const CACHE_NAME = "bola spanyol-v3.0";
+const CACHE_NAME = "bola spanyol-v3.1";
 var urlsToCache = [
   "/",
   "/nav.html",
