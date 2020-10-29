@@ -54,6 +54,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     else if (page === 'detail_info'){
                         getInfoTeams();
                     }
+                    else if (page === 'favorite'){
+                        getSavedInfoTeams();
+                    }
                 } else if (this.status === 404) {
                     content.innerHTML = "<p>Halaman tidak ditemukan.</p>";
                 } else {
