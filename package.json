@@ -1,0 +1,15 @@
+{
+  "name": "BagasPWA2NEW",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">   <a href=\"http://materializecss.com/\">     <img src=\"http://materializecss.com/res/materialize.svg\" width=\"150\">   </a> </p>",
+  "main": "idb.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "web-push": "^3.4.4"
+  }
+}
