@@ -138,7 +138,7 @@ function showTeams(data){
 }
 
 function getInfoTeams(){
-    return new Promise(function(resolve, reject) {//add promise
+    return new Promise(function(resolve, reject) {
     let urlParams = new URLSearchParams(window.location.search);
     let idParam = urlParams.get("id");
 
@@ -186,3 +186,32 @@ function getTeams(data){
 
     document.getElementById("detail_info").innerHTML = teams;
 }
+
+//new line get saved file indexed.db to favorite.html
+
+function getSavedInfoTeams() {
+    getAll().then(function(informations) {
+      console.log(informations);
+      let informationsHTML = "";
+      informations.forEach(function(information) {
+      informationsHTML += `
+        <div class="card" style = "top:20px;">
+          <div class = "card-image" style="width: 30%;display: block;margin-left: auto;margin-right: auto;top :20px;">
+            <img src = "${information.crestUrl}"/>
+              <span class="card-title"></span>
+          </div>
+          <div class="card-content">
+            <span class="card-title truncate" style = "font-size:35px;font-weight:bold;text-align: center;margin-top:20px;padding-bottom:15px;">${information.name}</span>
+            <p>Short Name : ${information.shortName}</p>
+            <p>Since : ${information.founded}</p>
+            <p>Address : ${information.address}</p>
+            <p>Email : ${information.email}</p>
+            <p>Number Phone : ${information.phone}</p>
+            <p>Website : ${information.website}</p>
+          </div>
+        </div>`;
+      });
+      // Sisipkan komponen card ke dalam elemen dengan id #body-content
+      document.getElementById("information").innerHTML = informationsHTML;
+    });
+  }
