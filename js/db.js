@@ -20,7 +20,7 @@ let dbPromised = idb.open("bola-spanyol", 1, function(upgradeDb) {
       });
   }
 
-  //add getAll 29 october 2020
+  //new line
   function getAll() {
     return new Promise(function(resolve, reject) {
       dbPromised
@@ -33,5 +33,32 @@ let dbPromised = idb.open("bola-spanyol", 1, function(upgradeDb) {
           console.log(information);
           resolve(information);
         });
+    });
+  }
+
+  //baru 
+  function getById(id) {
+    return new Promise(function(resolve, reject) {
+      dbPromised
+        .then(function(db) {
+          var tx = db.transaction("detail-info", "readonly");
+          var store = tx.objectStore("detail-info");
+          return store.get(id);
+        })
+        .then(function(information) {
+          resolve(information);
+        });
+    });
+  }
+
+  function DeleteFavorite(){
+    dbPromised
+      .then(db => {
+      var tx = db.transaction('detail-info', 'readwrite');
+      var store = tx.objectStore('detail-info');
+      store.delete('123456789');
+      return tx.complete;
+    }).then(function() {
+      console.log('Item deleted');
     });
   }
