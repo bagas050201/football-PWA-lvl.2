@@ -1,14 +1,14 @@
-const CACHE_NAME = "bola spanyol-v3.1";
+const CACHE_NAME = "bola spanyol-v3.8";
 var urlsToCache = [
   "/",
   "/nav.html",
   "/index.html",
   "/manifest.json",
   "/push.js",
+  "detail_info.html",
   "/pages/klasemen.html",
   "/pages/favorite.html",
   "/pages/information.html",
-  "detail_info.html",
   "/css/materialize.min.css",
   "/css/materialize.css",
   "/js/materialize.min.js",
@@ -22,7 +22,6 @@ var urlsToCache = [
   "/icon/icon-96new.png",
   "/icon/icon-192new.png",
   "/icon/icon-512new.png",
-  "/icon/icon-oritrans.png",
   "/icon/maskable_icon.png"
 ];
  
@@ -33,40 +32,6 @@ self.addEventListener("install", event => {
     })
   );
 });
-
-self.addEventListener("fetch", event => {
-    event.respondWith(
-      caches
-        .match(event.request, { cacheName: CACHE_NAME })
-        .then(response => {
-          if (response) {
-            console.log("ServiceWorker: Gunakan aset dari cache: ", response.url);
-            return response;
-          }
-   
-          console.log(
-            "ServiceWorker: Memuat aset dari server: ",
-            event.request.url
-          );
-          return fetch(event.request);
-        })
-    );
-  });
-  
-  self.addEventListener("activate", event => {
-    event.waitUntil(
-      caches.keys().then(cacheNames => {
-        return Promise.all(
-          cacheNames.map(cacheName => {
-            if (cacheName != CACHE_NAME) {
-              console.log("ServiceWorker: cache " + cacheName + " dihapus");
-              return caches.delete(cacheName);
-            }
-          })
-        );
-      })
-    );
-  });
 
   self.addEventListener("fetch", function(event) {
     const base_url = "https://api.football-data.org/v2/";
@@ -87,6 +52,22 @@ self.addEventListener("fetch", event => {
         )
     }
 });
+
+
+  self.addEventListener("activate", event => {
+    event.waitUntil(
+      caches.keys().then(cacheNames => {
+        return Promise.all(
+          cacheNames.map(cacheName => {
+            if (cacheName != CACHE_NAME) {
+              console.log("ServiceWorker: cache " + cacheName + " dihapus");
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      })
+    );
+  });
 
 //new line push event API
 self.addEventListener('push', function(event) {
