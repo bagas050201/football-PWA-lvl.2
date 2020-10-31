@@ -35,13 +35,19 @@
     </a>
 </div>
 
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large red" id="delete">
+    <i class="large material-icons">delete_forever</i>
+    </a>
+</div>
+
 <script src="js/materialize.min.js"></script>
 <script src="js/api.js"></script>
 <script src="js/idb.js"></script>
 <script src="js/db.js"></script>
 
 <script>
-    // REGISTER SERVICE WORKER
+    /* REGISTER SERVICE WORKER
     if ("serviceWorker" in navigator) {
         window.addEventListener("load", function() {
             navigator.serviceWorker
@@ -56,8 +62,9 @@
     } else {
         console.log("ServiceWorker belum didukung browser ini.");
     }
+*/
 
-//add event clicked to save data in indexed.db
+/*
 document.addEventListener("DOMContentLoaded", function() {
     let item = getInfoTeams();
     let save = document.getElementById("save");
@@ -68,6 +75,58 @@ document.addEventListener("DOMContentLoaded", function() {
             saveForLater(information);
         });
     };
+});
+*/
+/*
+document.addEventListener("DOMContentLoaded", function() {
+  let urlParams = new URLSearchParams(window.location.search);
+  let isFromSaved = urlParams.get("saved");
+  let btnSave = document.getElementById("save");
+  let item;
+  if (isFromSaved) {
+    // Hide fab jika dimuat dari indexed db
+    btnSave.style.display = 'none';
+    
+    // ambil artikel lalu tampilkan
+    item = getSavedInfoTeamsById();    
+  }else{
+    item = getInfoTeams();
+  }
+
+  btnSave.onclick = function() {
+    console.log("Tombol FAB di klik.");
+    item.then(function(information) {
+      saveForLater(information);
+    });
+  };
+});
+*/
+document.addEventListener("DOMContentLoaded", function() {
+  let urlParams = new URLSearchParams(window.location.search);
+  let isFromSaved = urlParams.get("saved");
+  let btnSave = document.getElementById("save");
+  let btndelete = document.getElementById("delete");
+  let item;
+  if (isFromSaved) {
+    btnSave.style.display = 'none';
+    item = getSavedInfoTeamsById();    
+  }else{
+    btndelete.style.display = 'none';
+    item = getInfoTeams();
+  }
+
+  btnSave.onclick = function() {
+    console.log("Tombol FAB di klik.");
+    item.then(function(information) {
+      saveForLater(information);
+    });
+  };
+
+  btndelete.onclick = function() {
+    console.log("Tombol delete di klik.");
+    DeleteFavorite();
+  };
+
 });
 
 </script>
