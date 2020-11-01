@@ -9,7 +9,7 @@ let dbPromised = idb.open("bola-spanyol", 1, function(upgradeDb) {
     console.log(information)
     dbPromised
       .then(db => {
-        let tx = db.transaction("detail-info", "readwrite");
+        const tx = db.transaction("detail-info", "readwrite");
         let store = tx.objectStore("detail-info");
         console.log(information);
         store.add(information);
@@ -18,14 +18,14 @@ let dbPromised = idb.open("bola-spanyol", 1, function(upgradeDb) {
       .then(() => {
         console.log("information berhasil di simpan.");
       });
-  }
+  };
 
   //new line
   function getAll() {
     return new Promise(function(resolve, reject) {
       dbPromised
         .then(function(db) {
-          let tx = db.transaction("detail-info", "readonly");
+          const tx = db.transaction("detail-info", "readonly");
           let store = tx.objectStore("detail-info");
           return store.getAll();
         })
@@ -34,31 +34,37 @@ let dbPromised = idb.open("bola-spanyol", 1, function(upgradeDb) {
           resolve(information);
         });
     });
-  }
+  };
 
   //baru 
   function getById(id) {
     return new Promise(function(resolve, reject) {
       dbPromised
         .then(function(db) {
-          var tx = db.transaction("detail-info", "readonly");
-          var store = tx.objectStore("detail-info");
+          const tx = db.transaction("detail-info", "readonly");
+          let store = tx.objectStore("detail-info");
           return store.get(id);
         })
         .then(function(information) {
           resolve(information);
         });
     });
-  }
+  };
 
-  function DeleteFavorite(){
-    dbPromised
-      .then(db => {
-      var tx = db.transaction('detail-info', 'readwrite');
-      var store = tx.objectStore('detail-info');
-      store.delete('123456789');
-      return tx.complete;
-    }).then(function() {
-      console.log('Item deleted');
+  function DeleteFavorite(id){
+    return new Promise(function(resolve, reject){
+      dbPromised
+        .then(function(db){
+            const tx = db.transaction("detail-info", `readwrite`);
+            let store = tx.objectStore("detail-info")
+            store.delete(id);
+            return tx;
+        }).then(transaction => {
+            if (transaction.complete) {
+                resolve(true)
+            } else {
+                reject(new Error(transaction.onerror))
+            };
+        });
     });
-  }
+  };
