@@ -123,10 +123,11 @@ document.addEventListener("DOMContentLoaded", function() {
   };
 
   btndelete.onclick = function() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let idParam = parseInt(urlParams.get("id"));
     console.log("Tombol delete di klik.");
-    DeleteFavorite();
+    DeleteFavorite(idParam);
   };
-
 });
 
 </script>
