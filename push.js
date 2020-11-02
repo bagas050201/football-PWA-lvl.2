@@ -1,30 +1,27 @@
 var webPush = require('web-push');
  
- //you can get publickey and private key from web-push generate-vapid-keys --json in terminal. you should install web-push from global and local , and then install npm init -y before generate vapid keys
 const vapidKeys = {
-   "publicKey": "BHVSp_vS5A_4p39B9C7BpSqkeeNM-tdgaWYyV1N63BZg2wimYfd_cIFZAOKbybhA_mZU_UPQF2I5Un2ZcZVF6kA",
-   "privateKey": "BnzoVCpwfw1tmAY0DkvdOAgxhLD2C1hpGZ2RDiqBLK0"
+   "publicKey": "BOEFCOdHkXD3JNTQLAshixW6d3zrwcKMUUe7_m8LiJNrkXOd0ky_jZ6x1-zgCMvY5SkdvAYFVQXEBwMxZYKfU3I",
+   "privateKey": "p7BN611x2r2KU5iBHQNJL2788Rgfp_Q4jemhGr8vZO0"
 };
  
  
 webPush.setVapidDetails(
-   'mailto:example@yourdomain.org',
+   'mailto:bagaspradana1011@gmail.com',
    vapidKeys.publicKey,
    vapidKeys.privateKey
 )
-
-//you can get endpoint, p256dh,auth from inspect element and get data in console. if you generate success a vapid key before this, you can see this data in your console
 var pushSubscription = {
-   "endpoint": "https://fcm.googleapis.com/fcm/send/csUU02m46kQ:APA91bGhWTh_MvcPJ-wf8Mv_rQBwKlKgiDhBgUrbcNw4upDNC2_zKtByA1zwv5GyzLacUPge2wsIvJRGeC7YdNwJcQsmouiqHQfSwqFvo8kzRtBjmpYz1q9HhxSkxwnOIVj4e-KgW0yo",
+   "endpoint": "https://fcm.googleapis.com/fcm/send/cxjmmubcShI:APA91bEIrLv-qspDLgy4zcx970fvuiJDvvNmxCGiMNTw4GDX3qUZSHreXOSJL4KS7krPwdVvqZWbG74mLfrcJUDEWXEQckRU5_8b8z4Ypbz9wA4jnRrsKdZ0NJQTtX2gCB-1_qU9sPpP",
    "keys": {
-       "p256dh": "BILsc18mx5modMoJcEXtVh8dMB7KwqnQHqj9hk0U3jLN64RLM81DsD9hH/aeWC5RNJSaygPeKdk+70mGSjTsaiU=",
-       "auth": "ljF7P+JCAkpVVcrUPi8L0g=="
+       "p256dh": "BA3eLJQcti2+wv6XQoY4+xHlshr1uO3qRSt0UJmfig2kziQAE+ZH1IdbsY/GFnlO8yYQsZsZLA2ESbi/wYCywvw=",
+       "auth": "xgmNxPK1RisdaqYTHflhVw=="
    }
 };
 var payload = 'Selamat! Aplikasi Anda sudah dapat menerima push notifikasi!';
- //get the gcmAPIKey from manifest.json
+ 
 var options = {
-   gcmAPIKey: '292971028946',
+   gcmAPIKey: '406622448484',
    TTL: 60
 };
 webPush.sendNotification(
