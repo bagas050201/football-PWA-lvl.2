@@ -29,26 +29,38 @@ if (result === "denied") {
   return;
 }
 
+navigator.serviceWorker.ready.then(() => {
 if (('PushManager' in window)) {
   navigator.serviceWorker.getRegistration().then(function(registration) {
       registration.pushManager.subscribe({
           userVisibleOnly: true,
-          //generate this from google firebase and get the id sender -> generate vapid key from terminal and get the public key and then paste the key in the bottom
-          applicationServerKey: urlBase64ToUint8Array("BHVSp_vS5A_4p39B9C7BpSqkeeNM-tdgaWYyV1N63BZg2wimYfd_cIFZAOKbybhA_mZU_UPQF2I5Un2ZcZVF6kA")
-      }).then(function(subscribe) {
+          applicationServerKey: urlBase64ToUint8Array("BOEFCOdHkXD3JNTQLAshixW6d3zrwcKMUUe7_m8LiJNrkXOd0ky_jZ6x1-zgCMvY5SkdvAYFVQXEBwMxZYKfU3I")
+      })
+      .then(function(subscribe){
+            console.log('Berhasil melakukan subscribe dengan endpoint: ', subscribe.endpoint);
+            console.log('Berhasil melakukan subscribe dengan p256dh key: ', btoa(String.fromCharCode.apply(
+              null, new Uint8Array(subscribe.getKey('p256dh')))));
+            console.log('Berhasil melakukan subscribe dengan auth key: ', btoa(String.fromCharCode.apply(
+              null, new Uint8Array(subscribe.getKey('auth')))));
+      })/*
+      .then(function(subscribe) {
           console.log('Berhasil melakukan subscribe dengan endpoint: ', subscribe.endpoint);
           console.log('Berhasil melakukan subscribe dengan p256dh key: ', btoa(String.fromCharCode.apply(
               null, new Uint8Array(subscribe.getKey('p256dh')))));
           console.log('Berhasil melakukan subscribe dengan auth key: ', btoa(String.fromCharCode.apply(
               null, new Uint8Array(subscribe.getKey('auth')))));
-      }).catch(function(e) {
+      })
+      */.catch(function(e) {
           console.error('Tidak dapat melakukan subscribe ', e.message);
       });
-  });
-}
+
+    });
+  }
+});
 });
 }
 }
+
 
 function urlBase64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4);
