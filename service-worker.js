@@ -1,4 +1,4 @@
-const CACHE_NAME = "bola spanyol-v4.3";
+const CACHE_NAME = "bola spanyol-v4.4";
 var urlsToCache = [
   "/",
   "/nav.html",
@@ -24,13 +24,6 @@ var urlsToCache = [
   "/icon/icon-512new.png",
   "/icon/maskable_icon.png"
 ];
-
-/*
-"https://fonts.googleapis.com/icon?family=Material+Icons",
-  "https://api.football-data.org/v2/competitions/2014/standings",
-  "https://api.football-data.org/v2/competitions/2014/teams",
-  "https://api.football-data.org/v2/teams"
-  */
 
 self.addEventListener("install", event => {
   event.waitUntil(
