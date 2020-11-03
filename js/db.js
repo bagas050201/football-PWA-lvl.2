@@ -12,7 +12,7 @@ let dbPromised = idb.open("bola-spanyol", 1, function(upgradeDb) {
         const tx = db.transaction("detail-info", "readwrite");
         let store = tx.objectStore("detail-info");
         console.log(information);
-        store.add(information);
+        store.put(information);
         return tx.complete;
       })
       .then(() => {
