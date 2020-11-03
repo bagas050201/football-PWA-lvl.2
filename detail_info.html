@@ -47,60 +47,6 @@
 <script src="js/db.js"></script>
 
 <script>
-    /* REGISTER SERVICE WORKER
-    if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function() {
-            navigator.serviceWorker
-                .register("/service-worker.js")
-                .then(function() {
-                console.log("Pendaftaran ServiceWorker berhasil");
-            })
-                .catch(function() {
-                console.log("Pendaftaran ServiceWorker gagal");
-            });
-        });
-    } else {
-        console.log("ServiceWorker belum didukung browser ini.");
-    }
-*/
-
-/*
-document.addEventListener("DOMContentLoaded", function() {
-    let item = getInfoTeams();
-    let save = document.getElementById("save");
-    save.onclick = function() {
-        console.log("Tombol FAB di klik.");
-        item.then(function (information) {
-            console.log(information);
-            saveForLater(information);
-        });
-    };
-});
-*/
-/*
-document.addEventListener("DOMContentLoaded", function() {
-  let urlParams = new URLSearchParams(window.location.search);
-  let isFromSaved = urlParams.get("saved");
-  let btnSave = document.getElementById("save");
-  let item;
-  if (isFromSaved) {
-    // Hide fab jika dimuat dari indexed db
-    btnSave.style.display = 'none';
-    
-    // ambil artikel lalu tampilkan
-    item = getSavedInfoTeamsById();    
-  }else{
-    item = getInfoTeams();
-  }
-
-  btnSave.onclick = function() {
-    console.log("Tombol FAB di klik.");
-    item.then(function(information) {
-      saveForLater(information);
-    });
-  };
-});
-*/
 document.addEventListener("DOMContentLoaded", function() {
   let urlParams = new URLSearchParams(window.location.search);
   let isFromSaved = urlParams.get("saved");
