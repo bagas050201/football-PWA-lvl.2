@@ -212,23 +212,6 @@ function getSavedInfoTeams() {
     });
   }
 
-/**
- * <div class="card" style = "top:20px;">
-          <div class = "card-image" style="width: 30%;display: block;margin-left: auto;margin-right: auto;top :20px;">
-            <img src = "${information.crestUrl}"/>
-              <span class="card-title"></span>
-          </div>
-          <div class="card-content">
-            <span class="card-title truncate" style = "font-size:35px;font-weight:bold;text-align: center;margin-top:20px;padding-bottom:15px;">${information.name}</span>
-            <p>Short Name : ${information.shortName}</p>
-            <p>Since : ${information.founded}</p>
-            <p>Address : ${information.address}</p>
-            <p>Email : ${information.email}</p>
-            <p>Number Phone : ${information.phone}</p>
-            <p>Website : ${information.website}</p>
-          </div>
-        </div>
- */
 
 function getSavedInfoTeamsById() {
     let urlParams = new URLSearchParams(window.location.search);
@@ -259,30 +242,3 @@ function getSavedInfoTeamsById() {
         document.getElementById("detail_info").innerHTML = informationsHTML;
       });
 }
-    /*
-    getById(idParam).then(function(information) {
-        console.log(information);
-        let informationsHTML = "";
-        informationsHTML += `
-            <div class="row">
-            <div class="col s12 m6">
-              <div class="card">
-                  <div class="card-image">
-                      <img src=  "${information.crestUrl}"/>
-                  </div>
-                  <div class="card-content">
-                      <span class="card-title truncate" style = "font-size:35px;font-weight:bold;text-align: center;margin-top:20px;padding-bottom:15px;">${information.name}</span>
-                      <p>Short Name : ${information.shortName}</p>
-                      <p>Since : ${information.founded}</p>
-                      <p>Address : ${information.address}</p>
-                      <p>Email : ${information.email}</p>
-                      <p>Number Phone : ${information.phone}</p>
-                      <p>Website : ${information.website}</p>
-                  </div>
-              </div>
-            </div>
-          </div>`;
-      // Sisipkan komponen card ke dalam elemen dengan id #content
-      document.getElementById("detail_info").innerHTML = informationsHTML;
-    });
-    */
