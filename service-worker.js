@@ -1,4 +1,4 @@
-const CACHE_NAME = "bola spanyol-v4.4";
+const CACHE_NAME = "bola spanyol-v4.8";
 var urlsToCache = [
   "/",
   "/nav.html",
@@ -22,7 +22,9 @@ var urlsToCache = [
   "/icon/icon-96new.png",
   "/icon/icon-192new.png",
   "/icon/icon-512new.png",
-  "/icon/maskable_icon.png"
+  "/icon/maskable_icon_new.png",
+  "https://fonts.googleapis.com/icon?family=Material+Icons",
+  "https://fonts.gstatic.com/s/materialicons/v55/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2"
 ];
 
 self.addEventListener("install", event => {
