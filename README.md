@@ -1,7 +1,7 @@
 # PROGRESSIVE WEB APPS USING API,IDEXED.DB,PUSH NOTIFICATION
 
 missing file : Nodes_Module
-## BACKEND ##
+## Server Side ##
 
 1. Create Google Firebase Project : https://console.firebase.google.com/u/0/
 2. Get ID Sender from option project
